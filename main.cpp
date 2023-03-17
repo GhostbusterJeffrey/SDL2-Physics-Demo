@@ -12,16 +12,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    if (TTF_Init() < 0) {
-        std::cerr << "SDL_ttf could not initialize. TTF_Error: " << TTF_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
-    }
-
     SDL_Window* window = SDL_CreateWindow("Physics Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window) {
         std::cerr << "Window could not be created. SDL_Error: " << SDL_GetError() << std::endl;
-        TTF_Quit();
         SDL_Quit();
         return 1;
     }
@@ -30,7 +23,6 @@ int main(int argc, char* argv[]) {
     if (!renderer) {
         std::cerr << "Renderer could not be created. SDL_Error: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window);
-        TTF_Quit();
         SDL_Quit();
         return 1;
     }
@@ -157,7 +149,6 @@ int main(int argc, char* argv[]) {
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    TTF_Quit();
     SDL_Quit();
 
     return 0;
